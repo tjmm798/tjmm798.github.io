@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cesium 3D Model</title>
+    <!-- 引入Cesium的CSS和JS -->
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <style>
+        #cesiumContainer {
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="cesiumContainer"></div>
+    <script>
+        // 设置Cesium Ion的访问令牌
+        Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlY2M3NDJlOS1lZDJiLTQ0YzUtODk2My05YTM2Njk1ODc5MzkiLCJpZCI6MjQ5MDI3LCJpYXQiOjE3MjkyMjcwNDR9.-HNBKBMfSAGQ8cCQNeUz5FaQC0cX2VHf3p2axc-6GEM';
+
+        // 初始化Cesium Viewer
+        const viewer = new Cesium.Viewer('cesiumContainer', {
+            terrainProvider: Cesium.createWorldTerrain(), // 加载全球地形
+            animation: false,
+            timeline: false
+        });
+
+        // 加载3D Tileset或glTF模型
+        const tileset = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+            url: Cesium.IonResource.fromAssetId(2777854)  // 替换为你的Asset ID
+        }));
+
+        // 聚焦到模型上
+        viewer.zoomTo(tileset);
+    </script>
+</body>
+</html>
